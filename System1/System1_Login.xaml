@@ -126,13 +126,9 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:UiElementExists DisplayName="Element Exists 'Dashboard'" Exists="[DasboardElementExist]" sap:VirtualizedContainerService.HintSize="410,107" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+            <ui:UiElementExists DisplayName="Element Exists Before Login 'Dashboard'" Exists="[DasboardElementExist]" sap:VirtualizedContainerService.HintSize="410,107" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
               <ui:UiElementExists.Target>
-                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c8d2a1ed-8d00-4fca-bc7e-5ca23f0d8ad2" InformativeScreenshot="1e11a336aff76525c622a1a792d1ef98" Selector="&lt;webctrl tag='H1' visibleinnertext='Dashboard' /&gt;" WaitForReady="COMPLETE">
-                  <ui:Target.TimeoutMS>
-                    <InArgument x:TypeArguments="x:Int32" />
-                  </ui:Target.TimeoutMS>
-                </ui:Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c8d2a1ed-8d00-4fca-bc7e-5ca23f0d8ad2" InformativeScreenshot="1e11a336aff76525c622a1a792d1ef98" Selector="&lt;webctrl tag='H1' visibleinnertext='Dashboard' /&gt;" TimeoutMS="3000" WaitForReady="COMPLETE" />
               </ui:UiElementExists.Target>
             </ui:UiElementExists>
             <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="410,85" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[DasboardElementExist]" />
