@@ -1,8 +1,8 @@
 {
-  "name": "REF_GenerateYearlyReport",
+  "name": "REF_GenerateYearlyReport_Performer",
   "projectId": "a068f05c-456a-4025-ab94-be19ff870779",
   "description": "A bot which gets the Work Items from ACME website send to orchestrator as queues and process the data using performer workflow.",
-  "main": "Main.xaml",
+  "main": "REF_Performer(Main).xaml",
   "dependencies": {
     "UiPath.Excel.Activities": "[2.21.0-preview]",
     "UiPath.System.Activities": "[23.6.0-preview]",
@@ -91,8 +91,8 @@
   "expressionLanguage": "VisualBasic",
   "entryPoints": [
     {
-      "filePath": "Main.xaml",
-      "uniqueId": "71209829-a5c8-46ed-a4b6-f63be24276c8",
+      "filePath": "REF_Performer(Main).xaml",
+      "uniqueId": "05799720-bd5d-4518-b491-44fbdb19308f",
       "input": [],
       "output": []
     }
