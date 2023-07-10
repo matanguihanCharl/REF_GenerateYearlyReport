@@ -98,7 +98,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text 'Tax ID'" sap:VirtualizedContainerService.HintSize="434,107" sap2010:WorkflowViewState.IdRef="GetValue_1">
+            <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text 'Vendor Information'" sap:VirtualizedContainerService.HintSize="434,107" sap2010:WorkflowViewState.IdRef="GetValue_1">
               <ui:GetValue.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5d8b3ee7-c5ff-4a8c-ab7e-83960bbb6e3e" InformativeScreenshot="93e009de5957d59805c11877bbbc0b7a" Selector="&lt;webctrl tag='P' /&gt;">
                   <ui:Target.TimeoutMS>
