@@ -3,6 +3,7 @@
     <x:Property Name="in_TaxID" Type="InArgument(x:String)" />
     <x:Property Name="in_Year" Type="InArgument(x:String)" />
     <x:Property Name="in_ReportDirPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_DMR_URL" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -97,11 +98,7 @@
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="System1_DownloadMonthlyReport" sap:VirtualizedContainerService.HintSize="644,2803" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="s:String[]" Name="ArrayMonths">
-        <Variable.Default>
-          <VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{&quot;January&quot;,&quot;February&quot;,&quot;March&quot;,&quot;April&quot;,&quot;May&quot;,&quot;June&quot;,&quot;July&quot;,&quot;August&quot;,&quot;September&quot;,&quot;October&quot;,&quot;November&quot;,&quot;December&quot;}" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="s:String[]" Default="[{&quot;January&quot;,&quot;February&quot;,&quot;March&quot;,&quot;April&quot;,&quot;May&quot;,&quot;June&quot;,&quot;July&quot;,&quot;August&quot;,&quot;September&quot;,&quot;October&quot;,&quot;November&quot;,&quot;December&quot;}]" Name="ArrayMonths" />
       <Variable x:TypeArguments="x:String" Name="ReportFolderPath" />
       <Variable x:TypeArguments="x:Boolean" Name="SaveAsDialogExist" />
       <Variable x:TypeArguments="x:Boolean" Name="ReportExist" />
@@ -132,7 +129,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:NavigateTo Browser="{x:Null}" DisplayName="Navigate To Download Reports Page" sap:VirtualizedContainerService.HintSize="486,85" sap2010:WorkflowViewState.IdRef="NavigateTo_1" Url="https://acme-test.uipath.com/reports/download" />
+            <ui:NavigateTo Browser="{x:Null}" DisplayName="Navigate To Download Reports Page" sap:VirtualizedContainerService.HintSize="486,85" sap2010:WorkflowViewState.IdRef="NavigateTo_1" Url="[in_DMR_URL]" />
             <ui:UiElementExists DisplayName="Element Exists 'Reports - Download Monthly Report'" Exists="[ReportExist]" sap:VirtualizedContainerService.HintSize="486,107" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
               <ui:UiElementExists.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="652958b8-8d05-4320-9b28-0697e2b8f87a" InformativeScreenshot="b2022335b8c1f8360c09e4b27cc7867e" Selector="&lt;webctrl tag='H1' visibleinnertext='Reports - Download Monthly Report' /&gt;" TimeoutMS="3000">

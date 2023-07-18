@@ -86,7 +86,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'Work Items Page'" sap:VirtualizedContainerService.HintSize="530,487" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="551e3db335afe56db16144b35ccfa28c" Selector="[string.Format(&quot;&lt;html app='chrome.exe' title='ACME System 1 *' url='https://acme-test.uipath.com/work-items/{0}' /&gt;&quot;, WIID)]">
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'Work Items Page'" sap:VirtualizedContainerService.HintSize="530,487" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="551e3db335afe56db16144b35ccfa28c" Selector="&lt;html app='chrome.exe' title='ACME System 1 *' /&gt;">
       <ui:BrowserScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
