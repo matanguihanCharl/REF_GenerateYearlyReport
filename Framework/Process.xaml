@@ -6,7 +6,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1048,1205</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1048,1692</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="50">
@@ -86,11 +86,17 @@
       <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
       <AssemblyReference>System.ObjectModel</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="512,1140" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="512,1627" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="TaxID" />
+      <Variable x:TypeArguments="x:String" Name="YearlyReportPath" />
+      <Variable x:TypeArguments="x:String" Name="ConfirmationID" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -100,7 +106,7 @@
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="450,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
     <ui:Comment DisplayName="Comment (placeholder)" sap:VirtualizedContainerService.HintSize="450,56" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//  Invoke steps of the process" />
-    <Sequence DisplayName="Clean up" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_11">
+    <Sequence DisplayName="Clean up" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_16">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:Boolean" Name="ReportsFolderExist" />
       </Sequence.Variables>
@@ -127,10 +133,11 @@
         </If.Else>
       </If>
     </Sequence>
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="450,85" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[in_Config(&quot;WorkItems_URL&quot;).ToString+&quot;/&quot;+in_TransactionItem.SpecificContent(&quot;WIID&quot;).ToString]" />
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="System1\System1_NavigateTo_WI.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="System1\System1_NavigateTo_WI.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="System1\System1_NavigateTo_WI.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="System1\System1_NavigateTo_WI.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_URL">[in_Config("WorkItems_URL").ToString +"/"+ in_TransactionItem.SpecificContent("WIID").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_URL">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;WorkItems_URL&quot;).ToString +&quot;/&quot;+ in_TransactionItem.SpecificContent(&quot;WIID&quot;).ToString" />
+        </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -139,10 +146,14 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="System1\System1_GetClientDetails.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="System1\System1_GetClientDetails.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="System1\System1_GetClientDetails.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="System1\System1_GetClientDetails.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <OutArgument x:TypeArguments="x:String" x:Key="out_TaxID">[TaxID]</OutArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_WIID">[in_TransactionItem.SpecificContent("WIID").ToString]</InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_TaxID">
+          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="TaxID" />
+        </OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_WIID">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_TransactionItem.SpecificContent(&quot;WIID&quot;).ToString" />
+        </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -151,12 +162,78 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="System1\System1_DownloadMonthlyReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="System1\System1_DownloadMonthlyReport.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="System1\System1_DownloadMonthlyReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="System1\System1_DownloadMonthlyReport.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_TaxID">[TaxID]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_Year">2021</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_ReportDirPath" />
-        <InArgument x:TypeArguments="x:String" x:Key="in_DMR_URL" />
+        <InArgument x:TypeArguments="x:String" x:Key="in_TaxID">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="TaxID" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Year">
+          <Literal x:TypeArguments="x:String">2022</Literal>
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_ReportDirPath">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;ReportDirPath&quot;).ToString" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_DMR_URL">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;DownloadMonthlyReport_URL&quot;).ToString" />
+        </InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="System1\System1_MergeMonthlyReports.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="System1\System1_MergeMonthlyReports.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_TaxID">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="TaxID" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Year">
+          <Literal x:TypeArguments="x:String">2022</Literal>
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_ReportDirPath">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;ReportDirPath&quot;).ToString" />
+        </InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_YearlyReportPath">
+          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="YearlyReportPath" />
+        </OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="System1\System1_UploadYearlyReport.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="System1\System1_UploadYearlyReport.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_TaxID">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="TaxID" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Year">
+          <Literal x:TypeArguments="x:String">2022</Literal>
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_YearlyReportPath">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Path.GetFullPath(YearlyReportPath)" />
+        </InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_Confirmation">
+          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="ConfirmationID" />
+        </OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_UYR_URL">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;UploadYearlyReport_URL&quot;).ToString" />
+        </InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="System1\System1_NavigateTo_WI.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="System1\System1_NavigateTo_WI.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_URL">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;WorkItems_URL&quot;).ToString +&quot;/&quot;+ in_TransactionItem.SpecificContent(&quot;WIID&quot;).ToString" />
+        </InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="System1\System1_UpdateWorkItems.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="450,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="System1\System1_UpdateWorkItems.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Status">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;Status&quot;).ToString" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Comment">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="ConfirmationID" />
+        </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
   </Sequence>
